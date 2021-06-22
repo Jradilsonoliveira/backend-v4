@@ -29,6 +29,12 @@ class OrdersRepository implements IOrdersRepository {
 
     return order;
   }
+
+  public async index(): Promise<Order[] | undefined> {
+    const orders = await this.ormRepository.find();
+
+    return orders;
+  }
 }
 
 export default OrdersRepository;
