@@ -4,4 +4,5 @@ export default interface IUpdateProductDTO {
     price: number;
     quantity: number;
     available: boolean;
+    favorite?: boolean;
   }

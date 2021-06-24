@@ -14,8 +14,6 @@ export default class ProductsController {
 
     const products = await indexProduct.execute();
 
-
-
     return response.json(products);
   }
 
@@ -36,7 +34,8 @@ export default class ProductsController {
       name,
       price,
       quantity,
-      avaliable
+      avaliable,
+      favorite
     } = request.body;
 
     const createProduct = container.resolve(CreateProductService);
@@ -46,7 +45,8 @@ export default class ProductsController {
       name,
       price,
       quantity,
-      avaliable
+      avaliable,
+      favorite
     });
 
     return response.json(product);
@@ -70,12 +70,13 @@ export default class ProductsController {
       name,
       price,
       quantity,
-      available
+      available,
+      favorite
     } = request.body;
 
     const updateProduct = container.resolve(UpdateProductService);
 
-    const product = await updateProduct.execute({id}, {image, name, price, quantity, available});
+    const product = await updateProduct.execute({id}, {image, name, price, quantity, available, favorite});
 
     return response.json(product);
   }

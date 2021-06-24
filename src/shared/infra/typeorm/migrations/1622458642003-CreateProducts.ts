@@ -28,8 +28,12 @@ export default class CreateProducts1622458642003 implements MigrationInterface {
                     precision: 10,
                 },
                 {
-                    name: 'available',
-                    type: 'boolean',
+                  name: 'available',
+                  type: 'boolean',
+                },
+                {
+                  name: 'favorite',
+                  type: 'boolean',
                 },
                 {
                   name: 'quantity',

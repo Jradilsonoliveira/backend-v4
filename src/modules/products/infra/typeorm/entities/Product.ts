@@ -29,6 +29,9 @@ class Product {
   @Column('boolean')
   available: boolean;
 
+  @Column('boolean')
+  favorite: boolean;
+
   @OneToMany(() => OrdersProducts, order => order.product)
   order_products: OrdersProducts[];
 

@@ -24,6 +24,7 @@ class ProductsRepository implements IProductsRepository {
     price,
     quantity,
     available,
+    favorite
   }: ICreateProductDTO): Promise<Product> {
     const product = this.ormRepository.create({
       image,
@@ -31,6 +32,7 @@ class ProductsRepository implements IProductsRepository {
       price,
       quantity,
       available,
+      favorite
     });
 
     await this.ormRepository.save(product);
@@ -38,8 +40,8 @@ class ProductsRepository implements IProductsRepository {
     return product;
   }
 
-  public async update({id}: IFindProducts, {image, name, price, quantity, available}: IUpdateProductDTO): Promise<Product | undefined> {
-    const updateProduct = await this.ormRepository.update({id}, {image, name, price, quantity, available});
+  public async update({id}: IFindProducts, {image, name, price, quantity, available, favorite}: IUpdateProductDTO): Promise<Product | undefined> {
+    const updateProduct = await this.ormRepository.update({id}, {image, name, price, quantity, available,favorite});
 
     if (updateProduct.affected === 1) {
       const product = await this.ormRepository.findOne({id});
