@@ -1,10 +1,10 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export default class CreateProducts1622458642003 implements MigrationInterface {
+export default class CreateFavorites1624727239993 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(new Table({
-            name: 'products',
+      await queryRunner.createTable(new Table({
+        name: 'favorites',
             columns: [
                 {
                     name: 'id',
@@ -14,27 +14,9 @@ export default class CreateProducts1622458642003 implements MigrationInterface {
                     default: 'uuid_generate_v4()',
                 },
                 {
-                    name: 'image',
-                    type: 'varchar',
+                    name: 'product_id',
+                    type: 'uuid',
                 },
-                {
-                    name: 'name',
-                    type: 'varchar',
-                },
-                {
-                    name: 'price',
-                    type: 'numeric',
-                    scale: 2,
-                    precision: 10,
-                },
-                {
-                  name: 'available',
-                  type: 'boolean',
-                },
-                {
-                  name: 'quantity',
-                  type: 'integer',
-              },
                 {
                     name: 'created_at',
                     type: 'timestamp',
@@ -46,10 +28,20 @@ export default class CreateProducts1622458642003 implements MigrationInterface {
                     default: 'now()',
                 },
             ],
+            foreignKeys: [
+              {
+                name: 'ForeignProduct',
+                columnNames: ['product_id'],
+                referencedTableName: 'products',
+                referencedColumnNames: ['id'],
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+              }
+            ],
         }));
-    }
+      }
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('products');
+      await queryRunner.dropTable('favorites');
     }
 
 }

@@ -4,5 +4,4 @@ export default interface ICreateProductDTO {
   price: number;
   quantity: number;
   available: boolean;
-  favorite: boolean;
 }

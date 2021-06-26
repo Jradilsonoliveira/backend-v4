@@ -2,17 +2,28 @@ import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
 import CreateProductService from '@modules/products/services/CreateProductService';
+import CreateToggleFavoriteProductService from '@modules/products/services/ToggleFavoriteProductService';
 import FindProductService from '@modules/products/services/FindProductService';
 import DeleteProductService from '@modules/products/services/DeleteProductService';
 import UpdateProductService from '@modules/products/services/UpdateProductService';
 import findOneByIdProductService from '@modules/products/services/FindProductById';
+import ListFavoriteService from '@modules/products/services/ListFavoritesService';
 
 export default class ProductsController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const indexProduct = container.resolve(FindProductService);
-
+    console.log('cheguei index');
     const products = await indexProduct.execute();
+
+    return response.json(products);
+  }
+
+  public async listFavorite(request: Request, response: Response): Promise<Response> {
+    const listFavorite = container.resolve(ListFavoriteService);
+    console.log('cheguei aqui');
+
+    const products = await listFavorite.execute();
 
     return response.json(products);
   }
@@ -35,7 +46,6 @@ export default class ProductsController {
       price,
       quantity,
       avaliable,
-      favorite
     } = request.body;
 
     const createProduct = container.resolve(CreateProductService);
@@ -46,7 +56,20 @@ export default class ProductsController {
       price,
       quantity,
       avaliable,
-      favorite
+    });
+
+    return response.json(product);
+  }
+
+  public async toggleFavorite(request: Request, response: Response): Promise<Response> {
+    const {
+      id
+    } = request.params;
+
+    const createFavoriteProduct = container.resolve(CreateToggleFavoriteProductService);
+
+    const product = await createFavoriteProduct.execute({
+      id
     });
 
     return response.json(product);

@@ -11,7 +11,6 @@ interface IRequest {
   price: number;
   quantity: number;
   avaliable: boolean;
-  favorite: boolean;
 }
 
 @injectable()
@@ -34,7 +33,6 @@ class CreateProductService {
       price,
       quantity,
       available: true,
-      favorite: false
     });
 
     return product;

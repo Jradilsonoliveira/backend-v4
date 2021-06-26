@@ -15,7 +15,15 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import UserTokenRepository from '@modules/users/infra/typeorm/repositories/UserTokenRepository';
 
+import IFavoritesRepository from '@modules/favorites/repositories/IFavoritesRepository';
+import FavoritesRepository from '@modules/favorites/infra/typeorm/repositories/FavoriteRepository';
+
 // TODO
+container.registerSingleton<IFavoritesRepository>(
+  'FavoritesRepository',
+  FavoritesRepository,
+);
+
 container.registerSingleton<ICustomersRepository>(
     'CustomersRepository',
     CustomersRepository,
