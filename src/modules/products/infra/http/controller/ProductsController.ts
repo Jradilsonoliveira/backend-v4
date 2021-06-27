@@ -8,6 +8,7 @@ import DeleteProductService from '@modules/products/services/DeleteProductServic
 import UpdateProductService from '@modules/products/services/UpdateProductService';
 import findOneByIdProductService from '@modules/products/services/FindProductById';
 import ListFavoriteService from '@modules/products/services/ListFavoritesService';
+import FindFavoriteByIdService from '@modules/products/services/FindFavoriteByIdService';
 
 export default class ProductsController {
 
@@ -26,6 +27,16 @@ export default class ProductsController {
     const products = await listFavorite.execute();
 
     return response.json(products);
+  }
+
+  public async findFavoriteById(request: Request, response: Response): Promise<Response> {
+    const {id} = request.params;
+
+    const findFavoriteById = container.resolve(FindFavoriteByIdService);
+
+    const favorite = await findFavoriteById.execute({id});
+
+    return response.json(favorite);
   }
 
   public async findOneById(request: Request, response: Response): Promise<Response> {

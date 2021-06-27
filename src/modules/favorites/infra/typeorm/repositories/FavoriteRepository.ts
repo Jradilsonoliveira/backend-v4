@@ -9,6 +9,10 @@ import IDeleteFavoriteByIdDTO from '@modules/favorites/dtos/IDeleteFavoriteByIdD
 import Product from '@modules/products/infra/typeorm/entities/Product';
 import AppError from '@shared/errors/AppError';
 
+interface IFindFavorite {
+  id: string;
+}
+
 class FavoritesRepository implements IFavoritesRepository {
   private ormRepository: Repository<Favorite>;
   private productRepository: Repository<Product>;
@@ -57,6 +61,12 @@ class FavoritesRepository implements IFavoritesRepository {
         }
       });
       return checkProduct;
+    }
+
+    public async findOneById({id}: IFindFavorite): Promise<Favorite | undefined> {
+      const favorite = await this.ormRepository.findOne(id);
+
+      return favorite;
     }
   }
 
