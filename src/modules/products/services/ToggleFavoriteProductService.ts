@@ -20,7 +20,7 @@ class ToggleFavoriteProductService {
     private favoritesRepository: IFavoritesRepository
   ) {}
 
-  public async execute({id}: IRequest): Promise<Product> {
+  public async execute({id}: IRequest): Promise<boolean> {
     const checkProduct = await this.productsRepository.findOneById({id});
 
     if (!checkProduct) {
@@ -31,10 +31,11 @@ class ToggleFavoriteProductService {
 
     if(existsFavorite){
       await this.favoritesRepository.delete({id: checkProduct.id })
-    }else{
-      await this.favoritesRepository.create({product: checkProduct});
+      return false;
     }
-    return checkProduct;
+    await this.favoritesRepository.create({product: checkProduct});
+    return true;
+
   }
 }
 

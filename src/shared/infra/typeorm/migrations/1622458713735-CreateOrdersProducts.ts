@@ -6,7 +6,7 @@ export default class CreateOrdersProducts1622458713735 implements MigrationInter
         await queryRunner.createTable(new Table({
             name: 'orders_products',
             columns: [
-                { 
+                {
                     name: 'id',
                     type: 'uuid',
                     isPrimary: true,
@@ -20,6 +20,10 @@ export default class CreateOrdersProducts1622458713735 implements MigrationInter
                 {
                     name: 'product_id',
                     type: 'uuid',
+                },
+                {
+                  name: 'name',
+                  type: 'varchar',
                 },
                 {
                     name: 'price',

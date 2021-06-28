@@ -34,7 +34,7 @@ class CreateOrderService {
     const customer = await this.customersRepository.findById(customer_id);
 
     if (!customer) {
-      throw new AppError('Customer does not exists'); 
+      throw new AppError('Customer does not exists');
     }
 
     const productsIds = products.map(product => {
@@ -50,9 +50,11 @@ class CreateOrderService {
       );
 
       return {
+        // name: productData.name,
         product_id: productData.id,
         price: productData.price,
         quantity: productFinal?.quantity || 0,
+        name: productData.name
       };
     });
 

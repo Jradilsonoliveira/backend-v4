@@ -15,7 +15,7 @@ class FindFavoriteByIdService {
   ) {}
 
   public async execute({id}: IRequest): Promise<Favorite | undefined> {
-    const favorite = await this.favoriteRepository.findOneById({id});
+    const favorite = await this.favoriteRepository.findByProductId({id});
 
     return favorite;
   }

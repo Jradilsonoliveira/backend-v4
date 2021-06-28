@@ -9,5 +9,4 @@ ordersRouter.post('/', ordersController.create);
 ordersRouter.get('/:id', ordersController.show);
 ordersRouter.get('/', ordersController.index);
 
-
 export default ordersRouter;

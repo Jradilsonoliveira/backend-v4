@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { Between, getRepository, Repository } from 'typeorm';
 
 import IOrdersRepository from '@modules/orders/repositories/IOrdersRepository';
 import ICreateOrderDTO from '@modules/orders/dtos/ICreateOrderDTO';
@@ -29,6 +29,21 @@ class OrdersRepository implements IOrdersRepository {
 
     return order;
   }
+
+  public async findByDate(date: string): Promise<Order[] | undefined> {
+    // TODO
+    const order = await this.ormRepository.find({
+      where: {
+        created_at: Between(
+          new Date(`${date} 00:00:00`).toISOString(),
+          new Date(`${date} 23:59:59`).toISOString(),
+        )
+      }
+    });
+
+    return order;
+  }
+
 
   public async index(): Promise<Order[] | undefined> {
     const orders = await this.ormRepository.find();

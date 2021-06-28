@@ -22,7 +22,6 @@ export default class ProductsController {
 
   public async listFavorite(request: Request, response: Response): Promise<Response> {
     const listFavorite = container.resolve(ListFavoriteService);
-    console.log('cheguei aqui');
 
     const products = await listFavorite.execute();
 

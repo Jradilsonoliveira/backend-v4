@@ -36,6 +36,9 @@ class OrdersProducts {
   @Column('integer')
   quantity: number;
 
+  @Column()
+  name: string;
+
   @CreateDateColumn()
   created_at: Date;
 

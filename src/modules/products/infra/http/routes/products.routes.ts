@@ -11,5 +11,6 @@ productsRouter.delete('/:id', productsController.delete);
 productsRouter.put('/:id', productsController.update);
 productsRouter.get('/:id', productsController.findOneById);
 productsRouter.patch('/:id/favorite', productsController.toggleFavorite);
+productsRouter.get('/:id/favorite', productsController.findFavoriteById);
 
 export default productsRouter;

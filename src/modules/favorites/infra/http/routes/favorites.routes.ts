@@ -6,7 +6,6 @@ const favoritesRouter = Router();
 const productsController = new ProductsController();
 
 favoritesRouter.get('/', productsController.listFavorite);
-favoritesRouter.get('/:id', productsController.findFavoriteById);
 
 export default favoritesRouter;
 
